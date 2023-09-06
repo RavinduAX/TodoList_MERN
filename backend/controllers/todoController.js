@@ -15,5 +15,16 @@ const createTodo = async (req, res) => {
       })
 }
 
+const getAllTodos = async (req, res) => {
+   await Todo.find().sort({ createdAt: -1 })
+      .then((todo) => {
+         res.status(200).json({ success: true, msg: 'Todo Get Success', payload: todo })
+      })
+      .catch((err) => {
+         res.status(500).json({ success: false, msg: 'Todo Create Failed!', payload: null })
+         logger.error(err.message);
+      })
+}
 
-module.exports = { createTodo };
+
+module.exports = { createTodo, getAllTodos };
