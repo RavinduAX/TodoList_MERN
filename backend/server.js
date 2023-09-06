@@ -7,12 +7,17 @@ const logger = require('./utils/logger')
 const PORT = process.env.PORT;
 const DB_URI = process.env.MONGO_URI;
 
+const todoRoutes = require('./routes/todo')
+
 //express app
 const app = express();
 
 //middleware
 app.use(express.json());
 app.use(cors());
+
+//routes
+app.use('/api/v1/todo', todoRoutes)
 
 //connect with db
 mongoose.connect(DB_URI)
