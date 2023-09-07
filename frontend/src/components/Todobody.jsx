@@ -47,7 +47,7 @@ const Todobody = () => {
          </div>
          <div className='overflow-y-scroll max-h-[20rem]'>
             {todos.map((todo) => (
-               <Todobox key={todo._id} todo={todo} />
+               <Todobox key={todo._id} todo={todo} getAllTodos={getAllTodos} />
             ))}
          </div>
 
