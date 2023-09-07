@@ -15,6 +15,7 @@ const createTodo = async (req, res) => {
       })
 }
 
+//get all todos
 const getAllTodos = async (req, res) => {
    await Todo.find().sort({ createdAt: -1 })
       .then((todo) => {
@@ -26,5 +27,19 @@ const getAllTodos = async (req, res) => {
       })
 }
 
+//delete todo
+const deleteTodo = async (req, res) => {
+   const todoId = req.params.id;
 
-module.exports = { createTodo, getAllTodos };
+   await Todo.findByIdAndDelete(todoId)
+      .then(() => {
+         res.status(200).json({ success: true, msg: 'Todo Delete Successfully', payload: null })
+      })
+      .catch((err) => {
+         res.status(500).json({ success: false, msg: 'Todo Create Failed!', payload: null })
+         logger.error(err.message);
+      })
+}
+
+
+module.exports = { createTodo, getAllTodos, deleteTodo };
