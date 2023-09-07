@@ -41,5 +41,21 @@ const deleteTodo = async (req, res) => {
       })
 }
 
+//udpate todo
+const updateTodo = async (req, res) => {
+   const todoId = req.params.id;
+   const { todo } = req.body;
+   const updateTodo = { todo }
 
-module.exports = { createTodo, getAllTodos, deleteTodo };
+   await Todo.findByIdAndUpdate(todoId, updateTodo)
+      .then(() => {
+         res.status(200).json({ success: true, msg: 'Todo Updated Successfully', payload: null })
+      })
+      .catch((err) => {
+         res.status(500).json({ success: false, msg: 'Todo Updated Failed!', payload: null })
+         logger.error(err.message);
+      })
+}
+
+
+module.exports = { createTodo, getAllTodos, deleteTodo, updateTodo };
