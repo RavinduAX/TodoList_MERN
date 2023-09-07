@@ -3,7 +3,7 @@ import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import TodoEdit from './TodoEdit';
 
-const Todobox = () => {
+const Todobox = ({todo}) => {
    const [completed, setCompleted] = useState(false);
    const [edit, setEdit] = useState(false);
 
@@ -19,7 +19,7 @@ const Todobox = () => {
       <div>
          {!edit ?
             <div className='bg-gray-600 flex justify-between items-center my-3 ps-2'>
-               <p className={`p-2 pointerDefault text-white ${completed ? 'taskDone' : ''}`} onClick={toggleComplete}>Go to Home</p>
+               <p className={`p-2 pointerDefault text-white ${completed ? 'taskDone' : ''}`} onClick={toggleComplete}>{todo.todo}</p>
                <div className='me-2 space-x-1'>
                   <button className='p-1 text-white text-xl' onClick={toggleEdit}><MdEdit /></button>
                   <button className='p-1 text-white text-xl'><MdDelete /></button>
