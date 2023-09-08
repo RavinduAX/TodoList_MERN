@@ -4,6 +4,7 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 const Todobody = () => {
    const [todos, setTodos] = useState([])
    const [text, setText] = useState('')
@@ -31,18 +32,18 @@ const Todobody = () => {
       axios.post('http://localhost:5000/api/v1/todo/', newTodo)
          .then((res) => {
             if (res.data.success) {
-               toastS(res.data.msg)
+               sNotify(res.data.msg)
                getAllTodos();
                setText('')
             }
          })
          .catch((err) => {
-            toastE(err.data.msg)
+            eNotify(err.data.msg)
             console.log(err)
          })
    }
 
-   const toastS = (msg) => {
+   const sNotify = (msg) => {
       toast.success(msg, {
          position: "top-right",
          autoClose: 1500,
@@ -53,10 +54,10 @@ const Todobody = () => {
          progress: undefined,
          theme: "dark",
       })
-   };
+   }
 
-   const toastE = (msg) => {
-      toast.error(msg, {
+   const eNotify = (msg) => {
+      toast.success(msg, {
          position: "top-right",
          autoClose: 1500,
          hideProgressBar: true,
@@ -66,7 +67,7 @@ const Todobody = () => {
          progress: undefined,
          theme: "dark",
       })
-   };
+   }
 
    return (
       <div>
