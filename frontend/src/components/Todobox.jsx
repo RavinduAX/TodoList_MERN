@@ -3,6 +3,8 @@ import { MdDelete } from "react-icons/md";
 import { MdEdit } from "react-icons/md";
 import TodoEdit from './TodoEdit';
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Todobox = ({todo, getAllTodos}) => {
    const [completed, setCompleted] = useState(false);
@@ -22,13 +24,39 @@ const Todobox = ({todo, getAllTodos}) => {
       axios.delete(`http://localhost:5000/api/v1/todo/${id}`)
          .then((res) => {
             if (res.data.success) {
-               alert(res.data.msg)
+               sNotify(res.data.msg)
                getAllTodos();
             }
          })
          .catch((err) => {
-            alert(err.data.msg)
+            eNotify(err.data.msg)
          })
+   }
+
+   const sNotify = (msg) => {
+      toast.success(msg, {
+         position: "top-right",
+         autoClose: 1500,
+         hideProgressBar: true,
+         closeOnClick: true,
+         pauseOnHover: false,
+         draggable: false,
+         progress: undefined,
+         theme: "dark",
+      })
+   }
+
+   const eNotify = (msg) => {
+      toast.success(msg, {
+         position: "top-right",
+         autoClose: 1500,
+         hideProgressBar: true,
+         closeOnClick: true,
+         pauseOnHover: false,
+         draggable: false,
+         progress: undefined,
+         theme: "dark",
+      })
    }
 
    return (
@@ -44,7 +72,18 @@ const Todobox = ({todo, getAllTodos}) => {
             :
             <TodoEdit todo={todo} getAllTodos={getAllTodos} setEdit={setEdit} />
          }
-
+         <ToastContainer
+            position="top-right"
+            autoClose={1500}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable={false}
+            pauseOnHover={false}
+            theme="dark"
+         />
       </div>
    )
 }
